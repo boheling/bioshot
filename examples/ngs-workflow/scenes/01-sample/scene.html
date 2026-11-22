@@ -1,0 +1,31 @@
+<template>
+  <style>
+    #sample-figure { top: 250px; }
+    #sample-unit { top: 450px; width: 760px; }
+    #sample-body { top: 640px; width: 780px; }
+  </style>
+  <div id="sample" class="film" data-composition-id="sample" data-width="1920" data-height="1080">
+    <img id="sample-plate" class="bio-full" src="assets/tube.webp" alt="">
+    <div id="sample-figure" class="figure">3 billion</div>
+    <div id="sample-unit" class="body">letters of DNA, in this one tube</div>
+    <div id="sample-body" class="body">A targeted test reads a few genes, hundreds of times each.</div>
+  </div>
+  <script>
+    (function () {
+      const S = window.__storyshot, B = window.BioKit, R = B.root('sample');
+      const q = (s) => R.querySelector(s);
+      B.stages(R, Film.stages, 0);
+      const cTube = B.callout(R, { at: [1296, 730], to: [1150, 730], text: "a person's DNA" });
+      const tl = gsap.timeline({ paused: true });
+      B.move(tl, q('#sample-plate'), { scale: 1, transformOrigin: '68% 62%' }, { scale: 1.05 }, 0, S.duration, 'none');
+      // "This tube holds a person's DNA."
+      cTube.show(tl, S.at('This tube', 0.4));
+      // "It is three billion letters long."
+      tl.fromTo(q('#sample-figure'), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, S.at('three billion'));
+      B.show(tl, q('#sample-unit'), S.at('three billion', 0.5));
+      // "A targeted test does not read it all. It reads the few genes it was built for, hundreds of times each."
+      B.show(tl, q('#sample-body'), S.at('few genes'));
+      window.__timelines['sample'] = tl;
+    })();
+  </script>
+</template>

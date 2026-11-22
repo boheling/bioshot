@@ -1,0 +1,45 @@
+id: sequencer-generic-hero
+kind: plate
+file: sequencer-generic-hero.webp
+title: Generic benchtop sequencer, three-quarter view
+tags:
+  - ngs
+  - sequencer
+  - instrument
+  - benchtop
+  - hero
+source: generated
+origin:
+  provider: fal
+  model: fal-ai/nano-banana-pro
+  request: 01a20191-f8cc-7223-b2c1-09588c50a145
+  seed: null
+  cost_usd: 0.15
+  prompt: "Studio product photograph of a fictional benchtop DNA sequencing instrument: a compact matte light-grey box about the size of a small microwave oven with softly rounded edges, a dark glass touchscreen set into the upper front, and a single flush loading door below it. Three-quarter front view from slightly above. Seamless pale grey background, soft even studio lighting with a gentle shadow underneath. No logos, no text, no brand markings, no people. An unbranded generic design that does not copy any existing product."
+  aspect: 16:9
+  resolution: 2K
+  refs: []
+  generated: 2026-11-22
+  considered:
+    library: []
+  encoded: webp q90
+  master:
+    sha256: aaf00bb2da4d06cfe4b73c28838478f1197b324a562cbac1f45c824c51a75d27
+    bytes: 5558291
+    ext: .png
+licence:
+  id: provider-terms
+claims:
+  - resembles no real product
+  - carries no logo or lettering
+sha256: fac636403408eebd4ad220fddfaa0730b2cb7e6da6614d87d36d94a3b5d02b0e
+bytes: 288844
+width: 2752
+height: 1536
+added: 2026-11-22
+review:
+  state: approved
+  by: boheling
+  at: 2026-11-22
+  sha256: fac636403408eebd4ad220fddfaa0730b2cb7e6da6614d87d36d94a3b5d02b0e
+  claims: 4f7a015d6f9a0103836245f22fdb91e8db96beb6c92ceb8b4ebd7849b7bb6d6c

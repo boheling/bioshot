@@ -1,0 +1,71 @@
+# M0 spike 3: the generation route, run once for real. A single-subject render, the same object with
+# its background removed, a 3D model made from that, and a second picture of the instrument made
+# with the first as reference (do a film's pictures agree with each other?).
+library: ../../library
+budget: 2
+assets:
+  - id: sequencer-generic-hero
+    want:
+      kind: plate
+      title: Generic benchtop sequencer, three-quarter view
+      tags: [ngs, sequencer, instrument, benchtop, hero]
+      aspect: "16:9"
+      prompt: >-
+        Studio product photograph of a fictional benchtop DNA sequencing instrument: a compact matte
+        light-grey box about the size of a small microwave oven with softly rounded edges, a dark
+        glass touchscreen set into the upper front, and a single flush loading door below it.
+        Three-quarter front view from slightly above. Seamless pale grey background, soft even
+        studio lighting with a gentle shadow underneath. No logos, no text, no brand markings, no
+        people. An unbranded generic design that does not copy any existing product.
+      claims:
+        - resembles no real product
+        - carries no logo or lettering
+  - id: sequencer-generic-open
+    want:
+      kind: plate
+      title: Generic benchtop sequencer with its loading door open
+      tags: [ngs, sequencer, instrument, benchtop, loading]
+      aspect: "16:9"
+      refs: [sequencer-generic-hero]
+      prompt: >-
+        The same instrument as in the reference image, with the same colours, materials and
+        proportions, the same three-quarter view and the same background, now with its front
+        loading door open, showing an empty flat stage inside where a flow cell is placed.
+        No logos, no text, no people.
+      claims:
+        - is the same instrument as sequencer-generic-hero
+        - resembles no real product
+  - id: flow-cell-generic-render
+    want:
+      kind: plate
+      title: Generic two-lane flow cell, single subject on white
+      tags: [ngs, flow cell, consumable, reference render]
+      aspect: "1:1"
+      prompt: >-
+        Studio product photograph of one generic DNA sequencing flow cell: a rectangular clear
+        glass slide with two straight parallel fluid lanes running along its length and a small
+        round port at each end of each lane, held in a slim matte black plastic carrier frame.
+        The whole object is visible and centred, seen from a three-quarter top view. Plain seamless
+        white background, soft even lighting, a soft shadow. No text, no labels, no logos, no
+        barcode, no hands.
+      claims:
+        - two separate lanes
+        - one port at each end of each lane
+        - resembles no real product
+  - id: flow-cell-generic-cutout
+    want:
+      kind: cutout
+      title: Generic two-lane flow cell, background removed
+      tags: [ngs, flow cell, consumable, cutout]
+      from: flow-cell-generic-render
+      claims: [two separate lanes]
+  - id: flow-cell-generic-3d
+    want:
+      kind: model
+      title: Generic two-lane flow cell, 3D model
+      tags: [ngs, flow cell, consumable, 3d]
+      from: flow-cell-generic-cutout
+      vertices: 150000
+      claims:
+        - two separate lanes on the side that was photographed
+        - the far side is the model's guess and is not shown in a film

@@ -1,0 +1,67 @@
+# How a targeted sequencing test reads DNA, from the tube to the variant. Brand-neutral: the
+# instrument and the consumables are generic, and nothing here describes one maker's chemistry.
+# Pictures of things (tube, magnet rack, sequencer, flow cell) are in the bioshot library (assets.yaml).
+# Everything that states a fact is drawn by the scenes: the library pieces and adapters, the probes
+# and beads, the clusters, the reads against the reference, the report.
+# What is said, and where it is simplified:
+#   - a human genome is about three billion letters long; a targeted panel reads its genes to a depth
+#     of hundreds of reads
+#   - hybrid capture: biotin-labelled probes bind the wanted pieces, streptavidin magnetic beads bind
+#     the probes, a magnet holds the beads through the washes
+#   - four colours, one per base, is the classic sequencing-by-synthesis scheme; some instruments use
+#     two colours or one. The colour-to-letter legend is this film's own (the chromatogram convention)
+#   - about half the reads carrying a change is what one changed copy out of two looks like; the
+#     picture shows 5 of 10 reads, far fewer than a real test, so that it can be counted on screen
+name: ngs-workflow
+purpose: explainer
+out: ngs-workflow.out.mp4
+voice: { provider: kokoro }
+subtitles: true
+ground: light
+theme: { accent: "#0f5c63", ink: "#172026", paper: "#e1e1e3", font: Outfit }
+scenes: { css: [../../kit/biokit.css, scenes/kit/look.css], js: [../../kit/biokit.js, scenes/kit/film.js] }
+
+steps:
+  - scene: { file: scenes/01-sample/scene.html, title: Sample }
+    say: >-
+      This tube holds a person's DNA. It is three billion letters long. A targeted test does not
+      read it all. It reads the few genes it was built for, hundreds of times each.
+
+  - scene: { file: scenes/02-library/scene.html, title: Library }
+    say: >-
+      First the DNA is cut into short pieces. Each piece gets an adapter on both ends, a handle
+      the sequencer can hold. That is a library.
+
+  - scene: { file: scenes/03-capture/scene.html, title: Capture, tail: 1.6 }
+    say: >-
+      Most pieces come from DNA the test does not need. So probes are added: short strands that
+      match the wanted genes. Each probe sticks to its piece, magnetic beads grab the probes, and
+      a magnet holds them while the rest is washed away.
+
+  - scene: { file: scenes/04-sequencer/scene.html, title: Sequencer }
+    say: >-
+      What is left goes into a sequencer, on a glass slide called a flow cell.
+
+  - scene: { file: scenes/05-signal/scene.html, title: Signal, tail: 1.2 }
+    say: >-
+      On the flow cell, every piece is copied into a tight cluster. In each cycle, every cluster
+      lights up in one of four colours: one colour for each letter. Read the colours in order,
+      and you have one read.
+
+  - scene: { file: scenes/06-reads/scene.html, title: Reads, tail: 1.2 }
+    say: >-
+      A read is short. So software lines the reads up against a reference, until every spot is
+      covered many times. Here, half of the reads say T where the reference says C. A reading
+      mistake shows up now and then. Half the reads is a real difference: a variant.
+
+  - scene: { file: scenes/07-report/scene.html, title: Report, tail: 1.2 }
+    say: >-
+      The test ends as a short list: which gene, which letter changed, and how many reads saw it.
+
+  - scene: { file: scenes/08-close/scene.html, title: The idea, tail: 1.8 }
+    say: >-
+      From a drop in a tube to one changed letter. Instruments differ in their chemistry. The
+      idea does not: make many copies, read each one, and trust what most of them say.
+
+  - scene: { file: scenes/credits/scene.html, title: Credits, tail: 2.0 }
+    say: The photographs here were made with AI. The molecules and the reads are drawn.

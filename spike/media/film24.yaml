@@ -1,0 +1,13 @@
+# M0 spike 1b: a 30 fps plate and a 24 fps plate in a 24 fps film
+name: media-spike-24
+purpose: explainer
+out: media-spike-24.out.mp4
+subtitles: false
+ground: dark
+output: { fps: 24 }
+scenes: { js: scenes/kit/spike.js }
+steps:
+  - scene: { file: scenes/a-basic/scene.html, title: 30 fps plate }
+    duration: 6
+  - scene: { file: scenes/f-24/scene.html, title: 24 fps plate }
+    duration: 6

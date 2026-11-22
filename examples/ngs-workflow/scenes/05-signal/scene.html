@@ -1,0 +1,56 @@
+<template>
+  <style>
+    #signal-head { top: 230px; width: 700px; }
+    #signal-body { top: 800px; width: 760px; }
+    #signal-cell { position: absolute; left: 1000px; top: 170px; width: 760px; height: 760px; transform-origin: 53% 49%; }
+    #signal-shadow { position: absolute; left: 1120px; top: 600px; width: 540px; height: 130px; border-radius: 50%; background: radial-gradient(closest-side, rgba(23, 32, 38, 0.3), rgba(23, 32, 38, 0)); }
+  </style>
+  <div id="signal" class="film" data-composition-id="signal" data-width="1920" data-height="1080">
+    <div id="signal-shadow"></div>
+    <img id="signal-cell" class="bio-plate" src="assets/flowcell.png" alt="">
+    <div id="signal-head" class="head">Each piece grows into a cluster</div>
+    <div id="signal-body" class="body">Read in order, the colours spell one read.</div>
+  </div>
+  <script>
+    (function () {
+      const S = window.__storyshot, B = window.BioKit, R = B.root('signal');
+      const q = (s) => R.querySelector(s);
+      B.stages(R, Film.stages, 3);
+      const cCell = B.callout(R, { at: [1180, 560], to: [1060, 560], text: 'flow cell' });
+      const field = B.clusters(R, { x: 1000, y: 170, size: 760, cols: 12, rows: 12, seed: 7, focus: [3, 3] });
+      field.win.style.transformOrigin = '53% 49%';
+      const CYCLES = 4, letters = [];
+      for (let k = 0; k < CYCLES; k++) letters.push(field.read(k));
+      const legend = B.legend(R, { left: 120, top: 500 });
+      const read = B.readout(R, { left: 120, top: 600, letters: letters });
+      const f = field.focusAt();
+      const cOne = B.callout(R, { at: [f[0] - 26, f[1]], to: [960, f[1]], text: 'one cluster' });
+      const tl = gsap.timeline({ paused: true });
+
+      // "On the flow cell," the slide on the bench
+      B.show(tl, q('#signal-head'), 0.1, 0.4);
+      tl.fromTo([q('#signal-cell'), q('#signal-shadow')], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.1);
+      cCell.show(tl, 0.4);
+      // "every piece is copied into a tight cluster." dive into one lane: the window opens out of the glass
+      const DIVE = S.at('copied', 0.9);
+      tl.to([cCell.label, cCell.line], { opacity: 0, duration: 0.2 }, DIVE - 0.1);
+      tl.to(R.querySelectorAll('svg.bio-lines .bio-dot')[0], { opacity: 0, duration: 0.2 }, DIVE - 0.1);
+      tl.to(q('#signal-shadow'), { opacity: 0, duration: 0.3 }, DIVE);
+      tl.fromTo(q('#signal-cell'), { scale: 1 }, { scale: 4, opacity: 0, duration: 0.9, ease: 'power2.in', immediateRender: false }, DIVE);
+      tl.fromTo(field.win, { scale: 0.08, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, ease: 'power2.inOut' }, DIVE + 0.25);
+      // "In each cycle, every cluster lights up in one of four colours:" one cycle after another
+      const C0 = S.at('In each cycle'), STEP = (S.at('Read the colours') - C0) / CYCLES;
+      field.watch(tl, C0 - 0.2);
+      cOne.show(tl, C0 - 0.2);
+      for (let k = 0; k < CYCLES; k++) {
+        field.cycle(tl, k, C0 + k * STEP);
+        read.add(tl, k, C0 + k * STEP + 0.25);
+      }
+      // "one colour for each letter of DNA."
+      B.show(tl, legend, S.at('four colours'));
+      // "Read the colours in order, and you have one read."
+      B.show(tl, q('#signal-body'), S.at('Read the colours'));
+      window.__timelines['signal'] = tl;
+    })();
+  </script>
+</template>

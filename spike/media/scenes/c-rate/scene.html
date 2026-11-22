@@ -1,0 +1,16 @@
+<template>
+  <style>
+    #c-rate { position: absolute; inset: 0; overflow: hidden; background: #101418; }
+    #c-rate-plate { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  </style>
+  <div id="c-rate" class="spike" data-composition-id="c-rate" data-width="1920" data-height="1080">
+    <video id="c-rate-plate" muted playsinline src="assets/count30.mp4" data-start="0" data-duration="6" data-media-start="2" data-playback-rate="0.5"></video>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      Spike.clock(tl, 'c-rate', 6);
+      window.__timelines['c-rate'] = tl;
+    })();
+  </script>
+</template>

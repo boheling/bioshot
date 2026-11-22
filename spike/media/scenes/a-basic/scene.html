@@ -1,0 +1,16 @@
+<template>
+  <style>
+    #a-basic { position: absolute; inset: 0; overflow: hidden; background: #101418; }
+    #a-basic-plate { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  </style>
+  <div id="a-basic" class="spike" data-composition-id="a-basic" data-width="1920" data-height="1080">
+    <video id="a-basic-plate" muted playsinline src="assets/count30.mp4" data-start="0" data-duration="6"></video>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      Spike.clock(tl, 'a-basic', 6);
+      window.__timelines['a-basic'] = tl;
+    })();
+  </script>
+</template>

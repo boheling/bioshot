@@ -1,0 +1,52 @@
+id: sample-tube-studio
+kind: plate
+file: sample-tube-studio.webp
+title: Sample tube in a rack, studio, room for words on the left
+intent: The starting material as someone sees it at the bench - one small tube with a little clear liquid in it, which is the DNA sample.
+tags:
+  - ngs
+  - sample
+  - tube
+  - microcentrifuge
+  - consumable
+  - bench
+source: generated
+origin:
+  provider: fal
+  model: fal-ai/nano-banana-pro/edit
+  request: 01a2019f-ff16-7b90-bebd-0d319cc2e83e
+  seed: null
+  cost_usd: 0.15
+  prompt: "Studio product photograph in the same style, lighting and seamless pale grey background as the reference image, but of a different subject: one clear 1.5 mL microcentrifuge tube with a conical bottom and a closed snap cap, standing upright in a small plain white plastic tube rack that has a few empty holes. A small amount of clear colourless liquid sits in the bottom of the tube. The rack and tube are placed in the right third of the frame; the left two thirds of the frame are empty background. Eye-level three-quarter view, soft shadow. No printed graduations, no text, no labels, no logos, no hands, no other objects."
+  aspect: 16:9
+  resolution: 2K
+  refs:
+    - sequencer-generic-hero.png
+  generated: 2026-11-22
+  considered:
+    library:
+      - flow-cell-generic-render
+      - sequencer-generic-hero
+      - sequencer-generic-open
+  encoded: webp q90
+  master:
+    sha256: 5cec165427b22b15e5adb1cca31750c238415f28175f63fd4682ef1c385744e6
+    bytes: 4922663
+    ext: .png
+licence:
+  id: provider-terms
+claims:
+  - a 1.5 mL snap-cap tube with a conical bottom
+  - a small volume of clear colourless liquid
+  - no lettering anywhere
+sha256: 9c7413f8fb9f4415874f93e1864a67c26d3e1a9a52ec7ea7c28d73d7cfc9b49c
+bytes: 136632
+width: 2752
+height: 1536
+added: 2026-11-22
+review:
+  state: approved
+  by: boheling
+  at: 2026-11-22
+  sha256: 9c7413f8fb9f4415874f93e1864a67c26d3e1a9a52ec7ea7c28d73d7cfc9b49c
+  claims: ed3b4dbcc7519c6d4ad4108c71de234b105ed461b7b340475a5dc4212836a871

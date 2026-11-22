@@ -1,0 +1,45 @@
+id: flow-cell-generic-render
+kind: plate
+file: flow-cell-generic-render.webp
+title: Generic two-lane flow cell, single subject on white
+tags:
+  - ngs
+  - flow cell
+  - consumable
+  - reference render
+source: generated
+origin:
+  provider: fal
+  model: fal-ai/nano-banana-pro
+  request: 01a20192-c9e2-7710-9561-1ca66afe58f7
+  seed: null
+  cost_usd: 0.15
+  prompt: "Studio product photograph of one generic DNA sequencing flow cell: a rectangular clear glass slide with two straight parallel fluid lanes running along its length and a small round port at each end of each lane, held in a slim matte black plastic carrier frame. The whole object is visible and centred, seen from a three-quarter top view. Plain seamless white background, soft even lighting, a soft shadow. No text, no labels, no logos, no barcode, no hands."
+  aspect: 1:1
+  resolution: 2K
+  refs: []
+  generated: 2026-11-22
+  considered:
+    library: []
+  encoded: webp q90
+  master:
+    sha256: 334d387071b2a6540358dac01fe6a6a6c005df516844516345ded5ae56688fca
+    bytes: 4450674
+    ext: .png
+licence:
+  id: provider-terms
+claims:
+  - two separate lanes
+  - one port at each end of each lane
+  - resembles no real product
+sha256: 732002c481433eab71ebcee1ddf063b7b89bacfcd6ebb4a00a562b117c4f03bf
+bytes: 84526
+width: 2048
+height: 2048
+added: 2026-11-22
+review:
+  state: approved
+  by: boheling
+  at: 2026-11-22
+  sha256: 732002c481433eab71ebcee1ddf063b7b89bacfcd6ebb4a00a562b117c4f03bf
+  claims: e017011c497d7bc905053396d2044d2993f9c6436751a2c0666f26da553bb27a

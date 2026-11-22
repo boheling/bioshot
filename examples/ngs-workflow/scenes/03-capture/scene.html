@@ -1,0 +1,38 @@
+<template>
+  <style>
+    #capture-head { top: 180px; width: 860px; }
+  </style>
+  <div id="capture" class="film" data-composition-id="capture" data-width="1920" data-height="1080">
+    <img id="capture-plate" class="bio-full" src="assets/magnet.webp" alt="">
+    <div id="capture-head" class="head">Keep only the genes the test is for</div>
+  </div>
+  <script>
+    (function () {
+      const S = window.__storyshot, B = window.BioKit, R = B.root('capture');
+      const q = (s) => R.querySelector(s);
+      B.stages(R, Film.stages, 2);
+      const cap = B.capture(R, { x: 138, y: 500, w: 820, h: 480, cols: 3, rows: 5, len: 190, targets: [1, 5, 9, 13], seed: 5 });
+      const p = cap.probeAt(0), b = cap.beadAt(1);
+      const cProbe = B.callout(R, { at: [p[0] - 40, p[1]], to: [p[0] - 150, p[1] - 44], text: 'probe' });
+      const cBead = B.callout(R, { at: [b[0] + 20, b[1]], to: [b[0] + 80, b[1] - 40], text: 'bead', side: 'right' });
+      const cPellet = B.callout(R, { at: [1292, 693], to: [1420, 640], text: 'beads held by the magnet', side: 'right' });
+      const tl = gsap.timeline({ paused: true });
+      B.show(tl, q('#capture-head'), 0.1, 0.4);
+      // "Most pieces come from DNA the test does not need." the library: many pieces, all alike
+      cap.show(tl, 0.3);
+      // "So probes are added: short strands that match the wanted genes. Each probe sticks to its piece,"
+      cap.probes(tl, S.at('probes are added'));
+      cProbe.show(tl, S.at('short strands'));
+      // "magnetic beads grab the probes,"
+      cap.beads(tl, S.at('magnetic beads'));
+      cBead.show(tl, S.at('magnetic beads', 0.6));
+      // "and a magnet holds them while the rest is washed away." the labels go, the unwanted pieces leave
+      const W = S.at('a magnet holds');
+      cPellet.show(tl, W);
+      for (const c of [cProbe, cBead]) tl.to([c.label, c.line], { opacity: 0, duration: 0.2 }, W + 0.5);
+      tl.to(R.querySelectorAll('svg.bio-lines .bio-dot'), { opacity: (i) => (i === 2 ? 1 : 0), duration: 0.2 }, W + 0.5);
+      cap.wash(tl, W + 0.7);
+      window.__timelines['capture'] = tl;
+    })();
+  </script>
+</template>

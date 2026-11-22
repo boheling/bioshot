@@ -1,0 +1,58 @@
+# What this film is made of. Every entry is an asset in the library with a brief: what it is for
+# (`intent`) and what it asserts (`claims`). `bioshot sync` puts each one into the scenes that use
+# it, and `bioshot check` holds the film until all of them are reviewed.
+# The DNA pieces, the probes and beads, the clusters, the reads and the report are not here:
+# they state facts, so the scenes draw them.
+library: ../../library
+film: film.yaml
+budget: 1
+assets:
+  - id: sample-tube-studio
+    in: [01-sample, 08-close]
+    as: tube.webp
+    want:
+      kind: plate
+      title: Sample tube in a rack, studio, room for words on the left
+      intent: The starting material as someone sees it at the bench - one small tube with a little clear liquid in it, which is the DNA sample.
+      tags: [ngs, sample, tube, microcentrifuge, consumable, bench]
+      aspect: "16:9"
+      refs: [sequencer-generic-hero]
+      prompt: >-
+        Studio product photograph in the same style, lighting and seamless pale grey background as
+        the reference image, but of a different subject: one clear 1.5 mL microcentrifuge tube with
+        a conical bottom and a closed snap cap, standing upright in a small plain white plastic
+        tube rack that has a few empty holes. A small amount of clear colourless liquid sits in the
+        bottom of the tube. The rack and tube are placed in the right third of the frame; the left
+        two thirds of the frame are empty background. Eye-level three-quarter view, soft shadow.
+        No printed graduations, no text, no labels, no logos, no hands, no other objects.
+      claims:
+        - a 1.5 mL snap-cap tube with a conical bottom
+        - a small volume of clear colourless liquid
+        - no lettering anywhere
+  - id: magnet-rack-beads
+    in: [03-capture]
+    as: magnet.webp
+    want:
+      kind: plate
+      title: Tube on a magnetic rack with the beads pulled to the wall, studio, room for words on the left
+      intent: The capture step as it looks at the bench - magnetic beads pulled into a pellet on the tube wall by a magnet, with clear liquid left beside them.
+      tags: [ngs, capture, magnetic beads, magnet rack, tube, bench]
+      aspect: "16:9"
+      refs: [sample-tube-studio]
+      prompt: >-
+        Studio product photograph in the same style, lighting and seamless pale grey background as
+        the reference image, of a different subject: one clear 1.5 mL microcentrifuge tube with a
+        closed snap cap, standing in a small plain white magnetic separation rack. A compact dark
+        brown pellet of magnetic beads is held against the inside wall of the tube on the side
+        facing the rack's magnet, and the liquid in the tube is clear and colourless. The rack and
+        tube sit in the right third of the frame; the left two thirds are empty background.
+        Eye-level three-quarter view, soft shadow. No text, no labels, no logos, no printed
+        graduations, no hands, no other objects.
+      claims:
+        - the bead pellet sits on the tube wall nearest the magnet
+        - the liquid is clear
+        - no lettering anywhere
+        - resembles no real product
+  - { id: sequencer-generic-hero, in: [04-sequencer], as: closed.webp }
+  - { id: sequencer-generic-open, in: [04-sequencer], as: open.webp }
+  - { id: flow-cell-generic-cutout, in: [05-signal], as: flowcell.png }

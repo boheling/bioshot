@@ -1,0 +1,37 @@
+id: flow-cell-generic-3d
+kind: model
+file: flow-cell-generic-3d.glb
+title: Generic two-lane flow cell, 3D model
+tags:
+  - ngs
+  - flow cell
+  - consumable
+  - 3d
+source: generated
+origin:
+  provider: fal
+  model: fal-ai/trellis-2
+  request: 01a20193-379a-78a2-9fef-6668e986d7c4
+  seed: null
+  cost_usd: 0.3
+  resolution: "1024"
+  vertices: 150000
+  generated: 2026-11-22
+  considered:
+    library: []
+licence:
+  id: provider-terms
+claims:
+  - two separate lanes on the side that was photographed
+  - the far side is the model's guess and is not shown in a film
+derived_from: flow-cell-generic-cutout
+sha256: 76b45537ce53e0ca7100147f1ac30c6ebae51f29e458ed404982abbd9f7bcd25
+bytes: 6661832
+added: 2026-11-22
+review:
+  state: rejected
+  by: boheling
+  at: 2026-11-22
+  note: "User: could not see it (the review page showed no preview of a 3D model). Also, my own observation: one end has three ports where the source picture has two."
+  sha256: 76b45537ce53e0ca7100147f1ac30c6ebae51f29e458ed404982abbd9f7bcd25
+  claims: bbb17d3816faa6af648eaf7db79ba0e440c583d1a273479e2b77d91eb1ff743e

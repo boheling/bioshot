@@ -1,0 +1,46 @@
+<template>
+  <style>
+    #reads-head { top: 150px; width: 900px; }
+    #reads-ref { position: absolute; left: 120px; top: 398px; color: var(--quiet); }
+    #reads-rd { position: absolute; left: 120px; top: 660px; color: var(--quiet); }
+    #reads-body { top: 968px; left: 328px; width: 1300px; }
+  </style>
+  <div id="reads" class="film" data-composition-id="reads" data-width="1920" data-height="1080">
+    <div id="reads-head" class="head">Line the reads up</div>
+    <div id="reads-ref" class="bio-label">reference</div>
+    <div id="reads-rd" class="bio-label">reads</div>
+    <div id="reads-body" class="body">Half the reads disagree in one spot: a variant.</div>
+  </div>
+  <script>
+    (function () {
+      const S = window.__storyshot, B = window.BioKit, R = B.root('reads');
+      const q = (s) => R.querySelector(s);
+      B.stages(R, Film.stages, 4);
+      // [start, length, says T]: ten of these twelve reads cover the marked spot, and five of the ten say T
+      const pile = B.pileup(R, { x: 328, y: 420, cell: 56, ref: 'GATTACAGCTTGCCCGTAACTGGA', col: 12, alt: 'T', reads: [
+        [0, 13, 0], [3, 14, 1], [6, 13, 0], [1, 13, 1], [9, 14, 0], [5, 12, 1],
+        [11, 13, 1], [2, 12, 0], [8, 13, 1], [10, 12, 0], [14, 10, 0], [0, 9, 0]],
+        slip: [4, 17, 'G'] });   // and one read, alone, says G where the reference says A
+      const col = pile.colAt(), n = pile.counts;
+      const cCount = B.callout(R, { at: [col[0], col[1]], to: [col[0] + 110, col[1] - 70], text: n.alt + ' of ' + n.cover + ' reads say T here', side: 'right' });
+      const sl = pile.slipAt();
+      const cSlip = B.callout(R, { at: sl, to: [328 + 24 * 56, sl[1]], text: 'a mistake', side: 'right' });
+      const tl = gsap.timeline({ paused: true });
+      B.show(tl, q('#reads-head'), 0.1, 0.4);
+      // "A read is short. So software lines the reads up against a reference,"
+      pile.ref(tl, S.at('lines the reads up') - 0.6);
+      B.show(tl, q('#reads-ref'), S.at('lines the reads up') - 0.4);
+      pile.drop(tl, S.at('lines the reads up'), S.at('half of the reads') - S.at('lines the reads up') - 0.6);
+      B.show(tl, q('#reads-rd'), S.at('lines the reads up', 0.3));
+      // "Here, half of the reads say T where the reference says C."
+      pile.mark(tl, S.at('half of the reads'));
+      cCount.show(tl, S.at('half of the reads', 0.7));
+      // "A reading mistake shows up now and then." (said about three seconds into the same breath)
+      pile.slip(tl, S.at('half of the reads', 3.0));
+      cSlip.show(tl, S.at('half of the reads', 3.2));
+      // "Half the reads is a real difference: a variant."
+      B.show(tl, q('#reads-body'), S.at('real difference'));
+      window.__timelines['reads'] = tl;
+    })();
+  </script>
+</template>

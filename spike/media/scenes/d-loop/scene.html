@@ -1,0 +1,16 @@
+<template>
+  <style>
+    #d-loop { position: absolute; inset: 0; overflow: hidden; background: #101418; }
+    #d-loop-plate { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  </style>
+  <div id="d-loop" class="spike" data-composition-id="d-loop" data-width="1920" data-height="1080">
+    <video id="d-loop-plate" muted playsinline src="assets/count30.mp4" loop data-start="0" data-duration="9"></video>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      Spike.clock(tl, 'd-loop', 9);
+      window.__timelines['d-loop'] = tl;
+    })();
+  </script>
+</template>

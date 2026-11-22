@@ -1,0 +1,10 @@
+# M0 spike 3: the generated flow cell model, drawn live in a scene
+name: glb-flowcell
+purpose: explainer
+out: glb-flowcell.out.mp4
+subtitles: false
+ground: light
+scenes: { js: [scenes/kit/bio3.js, scenes/kit/spike.js] }
+steps:
+  - scene: { file: scenes/c-flowcell/scene.html, title: generated flow cell }
+    duration: 6

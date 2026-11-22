@@ -1,0 +1,32 @@
+<template>
+  <style>
+    #sequencer-head { top: 300px; width: 440px; }
+    .seq-plate { transform-origin: 0% 50%; }
+  </style>
+  <div id="sequencer" class="film" data-composition-id="sequencer" data-width="1920" data-height="1080">
+    <!-- two pictures of the same instrument from the same camera: a cross-fade between them opens the door -->
+    <div id="sequencer-cam" class="bio-full seq-plate">
+      <img id="sequencer-closed" class="bio-full" src="assets/closed.webp" alt="">
+      <img id="sequencer-open" class="bio-full" src="assets/open.webp" alt="">
+    </div>
+    <div id="sequencer-head" class="head">Into the sequencer</div>
+  </div>
+  <script>
+    (function () {
+      const S = window.__storyshot, B = window.BioKit, R = B.root('sequencer');
+      const q = (s) => R.querySelector(s);
+      B.stages(R, Film.stages, 3);
+      const c = B.callout(R, { at: [1140, 728], to: [1560, 728], text: 'flow cell stage', side: 'right' });
+      const tl = gsap.timeline({ paused: true });
+      const T = S.at('glass slide');
+      // the camera is pushed in from the left edge, which moves the instrument right and leaves room for the words;
+      // it has stopped before the label lands, so the label stays on its part
+      B.move(tl, q('#sequencer-cam'), { scale: 1.06 }, { scale: 1.1 }, 0, T, 'power1.out');
+      B.show(tl, q('#sequencer-head'), 0.1, 0.4);
+      // "on a glass slide called a flow cell." the door opens
+      tl.fromTo(q('#sequencer-open'), { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power1.inOut' }, T);
+      c.show(tl, T + 0.7);
+      window.__timelines['sequencer'] = tl;
+    })();
+  </script>
+</template>

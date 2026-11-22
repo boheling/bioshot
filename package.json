@@ -1,0 +1,27 @@
+{
+  "name": "bioshot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An asset library and scene kit for biology and lab-product films, filmed with storyshot",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "build:kit": "esbuild kit/src/bio3.entry.js --bundle --format=iife --minify --outfile=kit/bio3.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "three": "^0.187.0"
+  },
+  "dependencies": {
+    "@fal-ai/client": "^1.11.0",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "bin": {
+    "bioshot": "bin/bioshot.mjs"
+  }
+}

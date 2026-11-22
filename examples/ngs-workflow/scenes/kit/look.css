@@ -1,0 +1,28 @@
+/* The look of this film: a seamless grey studio under even light, and one black window into the instrument.
+
+   1. Colour       The ground is the neutral pale grey of the studio the pictures were made in,
+                   so a drawn scene and a photographed one sit in the same room. The only
+                   saturated colours in the film are the four dyes inside the sequencer, and they
+                   appear only there: colour means "a base was read".
+   2. Type         Outfit for what a scene is about. IBM Plex Mono for names on parts, the way a
+                   tube or an instrument panel is lettered.
+   3. Composition  Words hang from the left edge at 120 px; the object takes the right 60% of the
+                   frame; a label reaches its part with a straight leader line. The workflow stage
+                   sits top left in every scene.
+   4. One bold thing  The square of dye-coloured clusters, black against the pale bench. */
+:root {
+  --ground: #e1e1e3;   /* measured from the studio pictures */
+  --quiet: #66706e;      /* structure, and the stages the film is not in */
+  --lead: #172026;       /* leader lines are ink: colour is kept for the dyes */
+  --face: 'Outfit', sans-serif;
+  --face-label: 'IBM Plex Mono', monospace;
+  --t-label: 32px;       /* a name on a part, a stage */
+  --t-body: 44px;        /* a sentence */
+  --t-head: 84px;        /* what the scene is about */
+  --t-figure: 190px;     /* a number that is itself the point */
+  --edge: 120px;
+}
+.film { position: absolute; inset: 0; overflow: hidden; background: #e1e1e3; color: var(--ink); font-family: var(--face); }
+.film .head { position: absolute; left: var(--edge); font-size: var(--t-head); line-height: 1.05; font-weight: 600; letter-spacing: -0.02em; }
+.film .body { position: absolute; left: var(--edge); font-size: var(--t-body); line-height: 1.25; font-weight: 400; }
+.film .figure { position: absolute; left: var(--edge); font-size: var(--t-figure); line-height: 0.95; font-weight: 600; letter-spacing: -0.03em; }

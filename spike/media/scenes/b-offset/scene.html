@@ -1,0 +1,16 @@
+<template>
+  <style>
+    #b-offset { position: absolute; inset: 0; overflow: hidden; background: #101418; }
+    #b-offset-plate { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  </style>
+  <div id="b-offset" class="spike" data-composition-id="b-offset" data-width="1920" data-height="1080">
+    <video id="b-offset-plate" muted playsinline src="assets/count30.mp4" data-start="1" data-duration="7"></video>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      Spike.clock(tl, 'b-offset', 8);
+      window.__timelines['b-offset'] = tl;
+    })();
+  </script>
+</template>

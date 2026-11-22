@@ -1,0 +1,55 @@
+<template>
+  <style>
+    #b-late { position: absolute; inset: 0; overflow: hidden; background: #0b0d10; }
+    #b-late-canvas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  </style>
+  <div id="b-late" class="spike" data-composition-id="b-late" data-width="1920" data-height="1080">
+    <canvas id="b-late-canvas" width="1920" height="1080"></canvas>
+  </div>
+  <script>
+    (function () {
+      const T = Bio3.three;
+      const root = Spike.root('b-late');
+      const canvas = root.querySelector('canvas');
+      const renderer = new T.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+      renderer.setPixelRatio(1);
+      renderer.setSize(1920, 1080, false);
+      renderer.toneMapping = T.ACESFilmicToneMapping;
+      const scene = new T.Scene();
+      scene.background = new T.Color(0x0b0d10);
+      scene.environment = new T.PMREMGenerator(renderer).fromScene(new Bio3.RoomEnvironment(), 0.04).texture;
+      scene.environmentIntensity = 0.5;
+      const rim = new T.DirectionalLight(0x58c8ff, 4);
+      rim.position.set(-3, 2, -4);
+      scene.add(rim);
+      const camera = new T.PerspectiveCamera(32, 16 / 9, 0.1, 100);
+      const state = { a: 0 };
+      // the frame for a point in the scene, from that point alone: an orbit that pushes in
+      const draw = () => {
+        const a = state.a, ang = -0.7 + a * 1.8, dist = 5.4 - a * 1.6;
+        camera.position.set(Math.sin(ang) * dist, 0.4 + a * 0.5, Math.cos(ang) * dist);
+        camera.lookAt(0, 0, 0);
+        renderer.render(scene, camera);
+      };
+      // the model arrives later than the timeline is registered; HyperFrames holds the first frame for this promise
+      const ready = new Promise((resolve, reject) => {
+        new Bio3.GLTFLoader().load('assets/model.glb', (g) => {
+          const m = g.scene, box = new T.Box3().setFromObject(m), size = box.getSize(new T.Vector3()), mid = box.getCenter(new T.Vector3());
+          const k = 2.2 / Math.max(size.x, size.y, size.z);
+          m.scale.setScalar(k);
+          m.position.set(-mid.x * k, -mid.y * k, -mid.z * k);
+          Spike.delay(3000).then(() => { scene.add(m); draw(); resolve(); });
+        }, undefined, reject);
+      });
+      window.__hf = window.__hf || {};
+      window.__hf.buildReady = window.__hf.buildReady || {};
+      window.__hf.buildReady['b-late-glb'] = ready;
+
+      const tl = gsap.timeline({ paused: true });
+      tl.to(state, { a: 1, duration: 6, ease: 'none', onUpdate: draw }, 0);
+      Spike.clock(tl, 'b-late', 6);
+      draw();
+      window.__timelines['b-late'] = tl;
+    })();
+  </script>
+</template>

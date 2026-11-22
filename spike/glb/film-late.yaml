@@ -1,0 +1,10 @@
+# M0 spike 2b: the same model, arriving 3 s late. Does frame 0 wait for window.__hf.buildReady?
+name: glb-spike-late
+purpose: explainer
+out: glb-spike-late.out.mp4
+subtitles: false
+ground: dark
+scenes: { js: [scenes/kit/bio3.js, scenes/kit/spike.js] }
+steps:
+  - scene: { file: scenes/b-late/scene.html, title: late model }
+    duration: 3

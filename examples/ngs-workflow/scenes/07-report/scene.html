@@ -1,0 +1,25 @@
+<template>
+  <style>
+    #report-head { top: 300px; width: 600px; }
+  </style>
+  <div id="report" class="film" data-composition-id="report" data-width="1920" data-height="1080">
+    <div id="report-head" class="head">What the lab gets back</div>
+  </div>
+  <script>
+    (function () {
+      const S = window.__storyshot, B = window.BioKit, R = B.root('report');
+      B.stages(R, Film.stages, 5);
+      // the same numbers the last scene drew; the gene has no name because this is no real result
+      const slip = B.sheet(R, { left: 860, top: 250, width: 880, title: 'Variant report (an example)', rows: [
+        ['Gene', 'one of the genes on the panel'], ['Change', 'C became T, at one position'], ['Seen in', '5 of 10 reads']] });
+      const tl = gsap.timeline({ paused: true });
+      B.show(tl, R.querySelector('#report-head'), 0.1, 0.4);
+      tl.fromTo(slip.box, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, S.at(0));
+      // "which gene, which letter changed, and how many reads saw it."
+      slip.row(tl, 0, S.at('which gene'));
+      slip.row(tl, 1, S.at('which letter'));
+      slip.row(tl, 2, S.at('how many reads'));
+      window.__timelines['report'] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,54 @@
+id: magnet-rack-beads
+kind: plate
+file: magnet-rack-beads.webp
+title: Tube on a magnetic rack with the beads pulled to the wall, studio, room for words on the left
+intent: The capture step as it looks at the bench - magnetic beads pulled into a pellet on the tube wall by a magnet, with clear liquid left beside them.
+tags:
+  - ngs
+  - capture
+  - magnetic beads
+  - magnet rack
+  - tube
+  - bench
+source: generated
+origin:
+  provider: fal
+  model: fal-ai/nano-banana-pro/edit
+  request: 01a201dd-87dc-7270-8efb-e497ed8cb4b6
+  seed: null
+  cost_usd: 0.15
+  prompt: "Studio product photograph in the same style, lighting and seamless pale grey background as the reference image, of a different subject: one clear 1.5 mL microcentrifuge tube with a closed snap cap, standing in a small plain white magnetic separation rack. A compact dark brown pellet of magnetic beads is held against the inside wall of the tube on the side facing the rack's magnet, and the liquid in the tube is clear and colourless. The rack and tube sit in the right third of the frame; the left two thirds are empty background. Eye-level three-quarter view, soft shadow. No text, no labels, no logos, no printed graduations, no hands, no other objects."
+  aspect: 16:9
+  resolution: 2K
+  refs:
+    - sample-tube-studio.png
+  generated: 2026-11-22
+  considered:
+    library:
+      - sample-tube-studio
+      - sequencer-generic-open
+      - flow-cell-generic-render
+      - sequencer-generic-hero
+  encoded: webp q90
+  master:
+    sha256: 4139016527f9926c06451d880291a1aab46305871db6b49b84efc98d97a58d05
+    bytes: 4736566
+    ext: .png
+licence:
+  id: provider-terms
+claims:
+  - the bead pellet sits on the tube wall nearest the magnet
+  - the liquid is clear
+  - no lettering anywhere
+  - resembles no real product
+sha256: d50a41fc1014970143cbc5e068af34cdecb82f02ade6fa6c1614814e122dab9b
+bytes: 83428
+width: 2752
+height: 1536
+added: 2026-11-22
+review:
+  state: approved
+  by: boheling
+  at: 2026-11-22
+  sha256: d50a41fc1014970143cbc5e068af34cdecb82f02ade6fa6c1614814e122dab9b
+  claims: 4d2ae23fc798d4f05d6b7fba1d962a22c07276280668f33c373a6020f849dda7

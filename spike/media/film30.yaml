@@ -1,0 +1,19 @@
+# M0 spike 1: does a <video> inside a storyshot scene land on the right frame?
+name: media-spike-30
+purpose: explainer
+out: media-spike-30.out.mp4
+subtitles: false
+ground: dark
+output: { fps: 30 }
+scenes: { js: scenes/kit/spike.js }
+steps:
+  - scene: { file: scenes/a-basic/scene.html, title: basic }
+    duration: 6
+  - scene: { file: scenes/b-offset/scene.html, title: offset and hold }
+    duration: 8
+  - scene: { file: scenes/c-rate/scene.html, title: trim and half speed }
+    duration: 6
+  - scene: { file: scenes/d-loop/scene.html, title: loop }
+    duration: 9
+  - scene: { file: scenes/e-alpha/scene.html, title: alpha in a moving wrapper }
+    duration: 6

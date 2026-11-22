@@ -1,0 +1,30 @@
+id: freezer-tube
+kind: icon
+file: freezer-tube.svg
+title: Sample tube with screw cap
+tags:
+  - tube
+  - sample
+  - consumable
+  - lab
+source: open
+origin:
+  url: https://bioicons.com/icons/cc-0/General_items/FGC/freezer_tube.svg
+  page: https://bioicons.com/
+  retrieved: 2026-11-22
+licence:
+  id: CC0-1.0
+  author: FGC
+claims: []
+sha256: 440f74b2d61901f0c9babf3d886df8121f24b13a964752548e1dfc4e7e46e073
+bytes: 2471
+width: 14
+height: 52
+added: 2026-11-22
+review:
+  state: rejected
+  by: boheling
+  at: 2026-11-22
+  note: "User: too ugly."
+  sha256: 440f74b2d61901f0c9babf3d886df8121f24b13a964752548e1dfc4e7e46e073
+  claims: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945

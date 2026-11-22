@@ -1,0 +1,35 @@
+id: flow-cell-generic-cutout
+kind: cutout
+file: flow-cell-generic-cutout.png
+title: Generic two-lane flow cell, background removed
+tags:
+  - ngs
+  - flow cell
+  - consumable
+  - cutout
+source: generated
+origin:
+  provider: fal
+  model: fal-ai/birefnet/v2
+  request: 01a20193-2962-77c1-8409-35d86b7c0eea
+  seed: null
+  cost_usd: 0.01
+  generated: 2026-11-22
+  considered:
+    library: []
+licence:
+  id: provider-terms
+claims:
+  - two separate lanes
+derived_from: flow-cell-generic-render
+sha256: c0c83fe38888266be7a22568562d4f54a3072d7cf0a850324c233724645a001f
+bytes: 1149285
+width: 2048
+height: 2048
+added: 2026-11-22
+review:
+  state: approved
+  by: boheling
+  at: 2026-11-22
+  sha256: c0c83fe38888266be7a22568562d4f54a3072d7cf0a850324c233724645a001f
+  claims: 1a6bebd73252cfb57b370557b986745cf93843e5690fd27e501c0e4447f34f48

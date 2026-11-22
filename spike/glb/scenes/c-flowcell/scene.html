@@ -1,0 +1,71 @@
+<template>
+  <style>
+    #c-flowcell { position: absolute; inset: 0; overflow: hidden; background: #eceeeb; }
+    #c-flowcell-canvas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  </style>
+  <div id="c-flowcell" class="spike" data-composition-id="c-flowcell" data-width="1920" data-height="1080">
+    <canvas id="c-flowcell-canvas" width="1920" height="1080"></canvas>
+  </div>
+  <script>
+    (function () {
+      const T = Bio3.three;
+      const root = Spike.root('c-flowcell');
+      const renderer = new T.WebGLRenderer({ canvas: root.querySelector('canvas'), antialias: true, preserveDrawingBuffer: true });
+      renderer.setPixelRatio(1);
+      renderer.setSize(1920, 1080, false);
+      renderer.toneMapping = T.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.05;
+      const scene = new T.Scene();
+      scene.background = new T.Color(0xeceeeb);
+      scene.environment = new T.PMREMGenerator(renderer).fromScene(new Bio3.RoomEnvironment(), 0.04).texture;
+      scene.environmentIntensity = 0.7;
+      const key = new T.DirectionalLight(0xfff4e2, 2.2); key.position.set(4, 6, 5); scene.add(key);
+      const rim = new T.DirectionalLight(0xcfe6ff, 1.2); rim.position.set(-5, 3, -4); scene.add(rim);
+      const camera = new T.PerspectiveCamera(30, 16 / 9, 0.1, 100);
+      const state = { a: 0 };
+      // a generated model is only right on the side that was photographed: the camera stays on that side
+      const draw = () => {
+        const a = state.a, az = -0.55 + a * 1.1, el = 0.62, dist = 6.4 - a * 1.2;
+        camera.position.set(Math.sin(az) * Math.cos(el) * dist, Math.sin(el) * dist, Math.cos(az) * Math.cos(el) * dist);
+        camera.lookAt(0, 0, 0);
+        renderer.render(scene, camera);
+      };
+      const ready = new Promise((resolve, reject) => {
+        new Bio3.GLTFLoader().load('assets/model.glb', (g) => {
+          const m = g.scene, box = new T.Box3().setFromObject(m), size = box.getSize(new T.Vector3()), mid = box.getCenter(new T.Vector3());
+          const k = 3.2 / Math.max(size.x, size.y, size.z);
+          m.scale.setScalar(k);
+          m.position.set(-mid.x * k, -mid.y * k, -mid.z * k);
+          // polish a generated texture for studio light: not shiny metal, shadows lifted by its own colours
+          m.traverse((o) => {
+            if (!o.isMesh || !o.material) return;
+            const mat = o.material;
+            mat.metalness = Math.min(mat.metalness ?? 0, 0.08);
+            mat.roughness = Math.max(0.32, Math.min(mat.roughness ?? 0.5, 0.6));
+            if (mat.map) { mat.map.anisotropy = 8; mat.emissive = new T.Color(0xffffff); mat.emissiveMap = mat.map; mat.emissiveIntensity = 0.07; }
+            mat.needsUpdate = true;
+          });
+          scene.add(m);
+          // a soft shadow under it, painted once: a radial gradient on a ground plane
+          const c = document.createElement('canvas'); c.width = c.height = 256;
+          const g2 = c.getContext('2d'), grad = g2.createRadialGradient(128, 128, 10, 128, 128, 128);
+          grad.addColorStop(0, 'rgba(20,28,34,0.38)'); grad.addColorStop(1, 'rgba(20,28,34,0)');
+          g2.fillStyle = grad; g2.fillRect(0, 0, 256, 256);
+          const shadow = new T.Mesh(new T.PlaneGeometry(size.x * k * 1.5, size.z * k * 2.2), new T.MeshBasicMaterial({ map: new T.CanvasTexture(c), transparent: true, depthWrite: false }));
+          shadow.rotation.x = -Math.PI / 2;
+          shadow.position.y = -size.y * k / 2 - 0.01;
+          scene.add(shadow);
+          draw();
+          resolve();
+        }, undefined, reject);
+      });
+      window.__hf = window.__hf || {};
+      window.__hf.buildReady = window.__hf.buildReady || {};
+      window.__hf.buildReady['c-flowcell-glb'] = ready;
+      const tl = gsap.timeline({ paused: true });
+      tl.to(state, { a: 1, duration: 6, ease: 'power1.inOut', onUpdate: draw }, 0);
+      draw();
+      window.__timelines['c-flowcell'] = tl;
+    })();
+  </script>
+</template>

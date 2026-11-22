@@ -1,0 +1,30 @@
+id: dna-sequencer-dbcls
+kind: icon
+file: dna-sequencer-dbcls.svg
+title: DNA sequencer, benchtop
+tags:
+  - ngs
+  - sequencer
+  - instrument
+  - benchtop
+source: open
+origin:
+  url: https://bioicons.com/icons/cc-by-4.0/Lab_apparatus/DBCLS/DNA_sequencer.svg
+  page: https://bioicons.com/
+  retrieved: 2026-11-22
+licence:
+  id: CC-BY-4.0
+  author: DBCLS TogoTV
+claims: []
+sha256: 4f0189d2030cb06e7780fbc15db17cb87a027dfae5ff434af612f13f24f746c8
+bytes: 55649
+width: 595
+height: 595
+added: 2026-11-22
+review:
+  state: rejected
+  by: boheling
+  at: 2026-11-22
+  note: "User, 2026-11-21, about every open-library picture: barely passable, does not express the intent; a substandard asset is worse than none."
+  sha256: 4f0189d2030cb06e7780fbc15db17cb87a027dfae5ff434af612f13f24f746c8
+  claims: 4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945

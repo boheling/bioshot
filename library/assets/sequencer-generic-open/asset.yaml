@@ -1,0 +1,46 @@
+id: sequencer-generic-open
+kind: plate
+file: sequencer-generic-open.webp
+title: Generic benchtop sequencer with its loading door open
+tags:
+  - ngs
+  - sequencer
+  - instrument
+  - benchtop
+  - loading
+source: generated
+origin:
+  provider: fal
+  model: fal-ai/nano-banana-pro/edit
+  request: 01a20192-5df5-72b3-a7fd-945fd251412a
+  seed: null
+  cost_usd: 0.15
+  prompt: The same instrument as in the reference image, with the same colours, materials and proportions, the same three-quarter view and the same background, now with its front loading door open, showing an empty flat stage inside where a flow cell is placed. No logos, no text, no people.
+  aspect: 16:9
+  resolution: 2K
+  refs:
+    - sequencer-generic-hero.png
+  generated: 2026-11-22
+  considered:
+    library: []
+  encoded: webp q90
+  master:
+    sha256: f66545af95b3dce5f1fd27482e8202b25d6b5c6d997a3744f000418538435968
+    bytes: 5378349
+    ext: .png
+licence:
+  id: provider-terms
+claims:
+  - is the same instrument as sequencer-generic-hero
+  - resembles no real product
+sha256: 72307fe7d73f7fe487db0dc2b629c0467348fa0afc4b6f9c4b8e087773a622f6
+bytes: 248114
+width: 2752
+height: 1536
+added: 2026-11-22
+review:
+  state: approved
+  by: boheling
+  at: 2026-11-22
+  sha256: 72307fe7d73f7fe487db0dc2b629c0467348fa0afc4b6f9c4b8e087773a622f6
+  claims: 5b22c3196c12d372f2a20cb9626b9d55959065f178a9d42a9ca58e2f3b227391

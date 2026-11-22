@@ -1,0 +1,30 @@
+node_modules/
+.env
+.env.*
+.DS_Store
+# storyshot's work dir (recordings, voice cache, rendered scene frames)
+.storyshot/
+# bioshot's own cache of provider responses. Approved outputs are NOT cache: they live in the
+# film's folder and are committed, because a model does not return the same picture twice.
+.bioshot/cache/
+# spike renders and the test media they are made from (regenerate with spike/media/make-assets.sh)
+*.out.mp4
+*.out.srt
+*.out.chapters.txt
+spike/**/assets/count*.mp4
+spike/**/assets/count*.webm
+spike/**/frames/
+# spike: a sample model fetched from Khronos and the generated three.js bundle
+spike/**/assets/*.glb
+# per-film working state: sync records, the review page, spend. The library is the source of truth;
+# a scene's assets/ folder is filled from it by `bioshot sync`.
+.bioshot/
+examples/**/scenes/*/assets/
+library/.cache/
+spike/glb/scenes/kit/bio3.js
+# written by `bioshot review`: the browse page and the four-view previews of 3D models
+library/index.html
+library/assets/*/preview.jpg
+# on this machine only: the originals WebP pictures were made from, and the files of rejected assets
+library/.masters/
+library/.rejected/

@@ -1,0 +1,22 @@
+<!-- Written by `bioshot sync`. Edits are overwritten: change the assets, not this file. -->
+<template>
+  <style>
+    #credits-body { position: absolute; left: 8%; right: 8%; top: 14%; }
+    #credits-note { font-size: 40px; line-height: 1.3; font-weight: 600; max-width: 30em; }
+    #credits-list { margin-top: 56px; font-size: 30px; line-height: 1.5; opacity: 0.85; }
+  </style>
+  <div id="credits" class="film" data-composition-id="credits" data-width="1920" data-height="1080">
+    <div id="credits-body">
+      <div id="credits-note">Illustrations in this film were generated with AI and reviewed by a person. They are not experimental data.</div>
+      <div id="credits-list"></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const S = window.__storyshot;
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo('#credits-body', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, S.at(0));
+      window.__timelines['credits'] = tl;
+    })();
+  </script>
+</template>
