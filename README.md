@@ -36,15 +36,17 @@ Early. What works today, and how it was checked:
 | Open-source search and download (Bioicons, Wikimedia Commons) | run against the live services |
 | Manifest, sync with DRAFT tags, check, credits scene, review page | unit tests and the example film |
 | A film from generated plates and drawn molecules, through storyshot 0.12 | `examples/ngs-workflow` renders (101 s, nine scenes) |
+| `init`, `setup`, `guide`, `doctor` | unit tests; a freshly initialised film syncs, plans and previews under storyshot |
 | Video and live GLB models inside a storyshot scene | [`spike/README.md`](spike/README.md) |
 | Generation through fal.ai: a picture, a picture made with a reference, a cutout, a 3D model | run once for real: [`spike/README.md`](spike/README.md) |
 
-Not built yet: 3D and video parts in BioKit, the scene templates, `bioshot init`, the skill,
-structures from PDB.
+Not built yet: 3D and video parts in BioKit, a starter per kind of film (workflow, mechanism,
+product), structures from PDB.
 
 ## Use
 
 ```sh
+bioshot init films/my-assay --topic "How the assay works"   # storyboard, manifest, look sheet, scenes
 bioshot find "flow cell"                     # is it in the library already?
 bioshot add <url> --kind icon --title "…" --licence "CC BY 4.0" --author "…"
 bioshot plan                                 # what the film still needs, what could be reused, the cost
@@ -55,6 +57,11 @@ bioshot sync                                 # put the film's assets into its sc
 bioshot check                                # reviewed, licensed, in place, unchanged since review
 storyshot render film.yaml
 ```
+
+`bioshot guide` prints the playbook: how to sort a film's pictures into looks, facts and evidence,
+how to write a brief, which prompts have worked, and what a model invents. `bioshot setup <agent>`
+installs it as a skill for Claude Code, Cursor, Codex, Gemini CLI, VS Code, Windsurf or Cline.
+`bioshot doctor` says what the machine lacks.
 
 A film lists its assets in `assets.yaml`, beside the storyshot storyboard:
 

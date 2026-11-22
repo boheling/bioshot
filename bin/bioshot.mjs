@@ -13,6 +13,9 @@ import { licenceTerms } from '../src/licence.mjs';
 import { envKey, gitUser } from '../src/util.mjs';
 import * as fal from '../src/providers/fal.mjs';
 import { toWebp, isReencodable, canWebp, WEBP_QUALITY } from '../src/encode.mjs';
+import { init } from '../src/init.mjs';
+import { setup, guide, TARGETS } from '../src/setup.mjs';
+import { storyshotDir } from '../src/storyshot.mjs';
 
 const HELP = `bioshot — an asset library and scene kit for biology and lab-product films (filmed with storyshot)
 
@@ -20,6 +23,7 @@ An asset comes from the library if a reviewed one fits its brief; otherwise it i
 Open sources are searched only on request: a found picture that nearly fits is worse than none.
 Whatever is added or generated joins the library and is there for the next film.
 
+  bioshot init <dir> --topic "…" [--stages a,b,c]   a film skeleton: storyboard, asset manifest, look sheet, scenes
   bioshot find <words> [--kind K] [--open]         search the library (--open: Bioicons and Wikimedia Commons too)
   bioshot add <file|url> --kind K --title T --licence L [--id ID] [--intent S] [--tags a,b] [--author A]
               [--attribution S] [--page URL] [--claim S]… [--derived-from ID]
@@ -35,6 +39,9 @@ Whatever is added or generated joins the library and is there for the next film.
   bioshot reject <id> --note S
   bioshot sync [assets.yaml]                       put the film's assets into its scene folders
   bioshot check [assets.yaml] [--drafts]           is everything in the film reviewed, licensed and in place
+  bioshot guide                                    print the playbook
+  bioshot setup <agent>                            install the playbook for a coding agent (${TARGETS.join(', ')})
+  bioshot doctor                                   what this machine has and lacks
 
   --library DIR   the library to use (default: the manifest's \`library:\`, $BIOSHOT_LIBRARY, ./library)
   kinds: ${KINDS.join(', ')}
@@ -62,6 +69,26 @@ const row = (a, lib) => `  ${a.id.padEnd(34)} ${a.kind.padEnd(9)} ${lib.status(a
 try {
   if (!cmd || cmd === 'help' || flags.help) {
     console.log(HELP);
+  } else if (cmd === 'init') {
+    const r = init({ dir: rest[0], topic: flags.topic, stages: flags.stages?.split(',') });
+    console.log(`✔ a film skeleton in ${path.relative(process.cwd(), r.root) || '.'}\n${r.written.map((f) => `  + ${f}`).join('\n')}\n  next: write the narration in film.yaml and the brief in assets.yaml, then in that folder:\n        bioshot plan  →  bioshot gen --go  →  bioshot review --open  →  bioshot sync  →  storyshot scene film.yaml --step 1`);
+  } else if (cmd === 'guide') {
+    process.stdout.write(guide());
+  } else if (cmd === 'setup') {
+    const written = setup(rest[0]);
+    console.log(`✔ bioshot's playbook is set up for ${rest[0]}\n${written.map((f) => `  + ${f}`).join('\n')}`);
+  } else if (cmd === 'doctor') {
+    const ok = (good, what, fix) => console.log(`  ${good ? '✔' : '✖'} ${what}${good || !fix ? '' : ` — ${fix}`}`);
+    const major = +process.versions.node.split('.')[0];
+    ok(major >= 22, `node ${process.versions.node}`, 'storyshot renders with Node 22 or newer');
+    const ff = spawnSync('ffmpeg', ['-version'], { encoding: 'utf8' });
+    ok(ff.status === 0, ff.status === 0 ? ff.stdout.split('\n')[0].replace(/ Copyright.*/, '') : 'ffmpeg', 'install ffmpeg');
+    ok(canWebp(), 'ffmpeg can write WebP', 'without libwebp, generated pictures stay as PNG');
+    let ss = null; try { ss = storyshotDir(); } catch { /* reported below */ }
+    ok(!!ss, ss ? `storyshot ${JSON.parse(fs.readFileSync(path.join(ss, 'package.json'), 'utf8')).version} at ${ss}` : 'storyshot', 'npm i -g storyshot, or set STORYSHOT_DIR');
+    ok(!!envKey('FAL_KEY'), 'FAL_KEY is set', 'put FAL_KEY=… in a .env file here or above; needed only to generate');
+    const lib = openFor();
+    console.log(`  library: ${lib.root} (${lib.list().length} assets)`);
   } else if (cmd === 'find') {
     const query = rest.join(' ');
     if (!query) fail('find what? e.g. bioshot find "flow cell"');
@@ -164,6 +191,7 @@ try {
     for (const f of r.marked) console.log(`  ~ ${f}   (not reviewed: tagged DRAFT)`);
     for (const f of r.removed) console.log(`  - ${f}`);
     for (const f of r.skipped) console.log(`  · skipped ${f}`);
+    for (const f of r.kit ?? []) console.log(`  + ${f}`);
     for (const p of r.problems) console.log(`  ✖ ${p}`);
     if (r.credits) console.log(`  credits: ${r.credits} (add it as the film's last scene)`);
     console.log(`✔ synced: ${r.copied.length} copied, ${r.marked.length} marked, ${r.kept.length} unchanged, ${r.removed.length} removed`);

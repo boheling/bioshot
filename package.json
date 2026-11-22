@@ -23,5 +23,12 @@
   },
   "bin": {
     "bioshot": "bin/bioshot.mjs"
-  }
+  },
+  "files": [
+    "bin",
+    "src",
+    "kit",
+    "skills",
+    "LICENSE"
+  ]
 }

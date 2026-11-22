@@ -28,3 +28,7 @@ library/assets/*/preview.jpg
 # on this machine only: the originals WebP pictures were made from, and the files of rejected assets
 library/.masters/
 library/.rejected/
+# copied into a film by `bioshot sync`
+examples/**/scenes/kit/biokit.js
+examples/**/scenes/kit/biokit.css
+examples/**/scenes/kit/bio3.js

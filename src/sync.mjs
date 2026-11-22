@@ -5,9 +5,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { sha256, isImage, isRaster } from './util.mjs';
 import { creditLine } from './licence.mjs';
 
+const KIT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'kit');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 // The mark on a picture nobody has reviewed: a small amber DRAFT tag in the top-left corner, a thin
@@ -95,7 +97,7 @@ export function sync({ manifest, lib }) {
   const report = { copied: [], marked: [], kept: [], skipped: [], removed: [], problems: [] };
   for (const e of manifest.assets) {
     const asset = lib.get(e.id);
-    if (!asset) { report.problems.push(`${e.id}: not in the library yet (bioshot find, then bioshot gen)`); continue; }
+    if (!asset) { report.problems.push(`${e.id}: not in the library yet (bioshot plan, then bioshot gen --go)`); continue; }
     const status = lib.status(asset), src = lib.fileOf(asset);
     if (status === 'rejected') { report.problems.push(`${e.id}: it was rejected in review — replace it`); continue; }
     if (status === 'missing') { report.problems.push(`${e.id}: its file is missing from the library`); continue; }
@@ -122,6 +124,16 @@ export function sync({ manifest, lib }) {
     if (files[rel]) continue;
     const f = path.join(manifest.dir, rel);
     if (fs.existsSync(f) && sha256(fs.readFileSync(f)) === before[rel].out) { fs.rmSync(f); report.removed.push(rel); }
+  }
+  // BioKit travels with the film: the scenes load it from scenes/kit/. The 3D bundle only when a model is used.
+  report.kit = [];
+  if (fs.existsSync(manifest.scenesDir)) {
+    const has3d = manifest.assets.some((e) => lib.get(e.id)?.kind === 'model');
+    for (const f of ['biokit.js', 'biokit.css', ...(has3d ? ['bio3.js'] : [])]) {
+      const src = path.join(KIT, f), dest = path.join(manifest.scenesDir, 'kit', f);
+      if (!fs.existsSync(src)) continue;
+      if (!fs.existsSync(dest) || sha256(fs.readFileSync(dest)) !== sha256(fs.readFileSync(src))) { fs.mkdirSync(path.dirname(dest), { recursive: true }); fs.copyFileSync(src, dest); report.kit.push(path.relative(manifest.dir, dest)); }
+    }
   }
   const c = credits({ manifest, lib });
   if (c.disclosure || c.lines.length) {

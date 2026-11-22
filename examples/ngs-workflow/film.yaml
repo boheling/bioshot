@@ -19,7 +19,7 @@ voice: { provider: kokoro }
 subtitles: true
 ground: light
 theme: { accent: "#0f5c63", ink: "#172026", paper: "#e1e1e3", font: Outfit }
-scenes: { css: [../../kit/biokit.css, scenes/kit/look.css], js: [../../kit/biokit.js, scenes/kit/film.js] }
+scenes: { css: [scenes/kit/biokit.css, scenes/kit/look.css], js: [scenes/kit/biokit.js, scenes/kit/film.js] }
 
 steps:
   - scene: { file: scenes/01-sample/scene.html, title: Sample }
